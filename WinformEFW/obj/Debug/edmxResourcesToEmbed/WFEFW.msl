@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OefeningEFWModelStoreContainer" CdmEntityContainer="OefeningEFWEntities1">
+    <EntitySetMapping Name="Badges">
+      <EntityTypeMapping TypeName="OefeningEFWModel.Badges">
+        <MappingFragment StoreEntitySet="Badges">
+          <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persoon">
+      <EntityTypeMapping TypeName="OefeningEFWModel.Persoon">
+        <MappingFragment StoreEntitySet="Persoon">
+          <ScalarProperty Name="PersoonId" ColumnName="PersoonId" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Leeftijd" ColumnName="Leeftijd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persoon_Badge">
+      <EntityTypeMapping TypeName="OefeningEFWModel.Persoon_Badge">
+        <MappingFragment StoreEntitySet="Persoon_Badge">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="PersoonId" ColumnName="PersoonId" />
+          <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

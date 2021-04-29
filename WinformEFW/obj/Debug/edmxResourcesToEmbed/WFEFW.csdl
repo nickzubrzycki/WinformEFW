@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OefeningEFWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Badges">
+    <Key>
+      <PropertyRef Name="BadgeId" />
+    </Key>
+    <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Persoon_Badge" Relationship="Self.FK_Persoon_Badge_Badges" FromRole="Badges" ToRole="Persoon_Badge" />
+  </EntityType>
+  <EntityType Name="Persoon">
+    <Key>
+      <PropertyRef Name="PersoonId" />
+    </Key>
+    <Property Name="PersoonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Leeftijd" Type="Int32" />
+    <NavigationProperty Name="Persoon_Badge" Relationship="Self.FK_Persoon_Badge_Persoon" FromRole="Persoon" ToRole="Persoon_Badge" />
+  </EntityType>
+  <EntityType Name="Persoon_Badge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersoonId" Type="Int32" />
+    <Property Name="BadgeId" Type="Int32" />
+    <NavigationProperty Name="Badges" Relationship="Self.FK_Persoon_Badge_Badges" FromRole="Persoon_Badge" ToRole="Badges" />
+    <NavigationProperty Name="Persoon" Relationship="Self.FK_Persoon_Badge_Persoon" FromRole="Persoon_Badge" ToRole="Persoon" />
+  </EntityType>
+  <Association Name="FK_Persoon_Badge_Badges">
+    <End Role="Badges" Type="Self.Badges" Multiplicity="0..1" />
+    <End Role="Persoon_Badge" Type="Self.Persoon_Badge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Badges">
+        <PropertyRef Name="BadgeId" />
+      </Principal>
+      <Dependent Role="Persoon_Badge">
+        <PropertyRef Name="BadgeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persoon_Badge_Persoon">
+    <End Role="Persoon" Type="Self.Persoon" Multiplicity="0..1" />
+    <End Role="Persoon_Badge" Type="Self.Persoon_Badge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persoon">
+        <PropertyRef Name="PersoonId" />
+      </Principal>
+      <Dependent Role="Persoon_Badge">
+        <PropertyRef Name="PersoonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OefeningEFWEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Badges" EntityType="Self.Badges" />
+    <EntitySet Name="Persoon" EntityType="Self.Persoon" />
+    <EntitySet Name="Persoon_Badge" EntityType="Self.Persoon_Badge" />
+    <AssociationSet Name="FK_Persoon_Badge_Badges" Association="Self.FK_Persoon_Badge_Badges">
+      <End Role="Badges" EntitySet="Badges" />
+      <End Role="Persoon_Badge" EntitySet="Persoon_Badge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persoon_Badge_Persoon" Association="Self.FK_Persoon_Badge_Persoon">
+      <End Role="Persoon" EntitySet="Persoon" />
+      <End Role="Persoon_Badge" EntitySet="Persoon_Badge" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
